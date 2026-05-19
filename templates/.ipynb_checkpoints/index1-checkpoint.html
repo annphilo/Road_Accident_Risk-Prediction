@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Road Accident Risk Prediction</title>
+
+    <style>
+
+        body{
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar{
+            background: #111;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .container{
+            width: 600px;
+            background: white;
+            margin: 30px auto;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 0px 15px gray;
+        }
+
+        h1{
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        label{
+            font-weight: bold;
+        }
+
+        input, select{
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 18px;
+            border-radius: 5px;
+            border: 1px solid gray;
+        }
+
+        button{
+            width: 100%;
+            padding: 14px;
+            background: black;
+            color: white;
+            border: none;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover{
+            background: #333;
+        }
+
+        .result-box{
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            background: #f8f8f8;
+            box-shadow: 0px 0px 5px lightgray;
+        }
+
+        .risk{
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .score{
+            font-size: 22px;
+            margin-top: 10px;
+        }
+
+        .advice{
+            margin-top: 15px;
+            font-size: 18px;
+        }
+
+        .footer{
+            margin-top: 30px;
+            text-align: center;
+            color: gray;
+            font-size: 14px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="navbar">
+
+        🚦 Road Accident Risk Prediction System
+
+    </div>
+
+
+    <div class="container">
+
+        <h1>Predict Accident Risk</h1>
+
+        <form action="/predict" method="POST">
+
+
+            <label>Road Type</label>
+
+            <select name="road_type" required>
+
+                <option value="Highway">Highway</option>
+
+                <option value="City">City</option>
+
+                <option value="Rural">Rural</option>
+
+            </select>
+
+
+            <label>Number of Lanes</label>
+
+            <input type="number"
+                   name="num_lanes"
+                   required>
+
+
+            <label>Curvature</label>
+
+            <select name="curvature" required>
+
+                <option value="Straight">Straight</option>
+
+                <option value="Curved">Curved</option>
+
+            </select>
+
+
+            <label>Speed Limit</label>
+
+            <input type="number"
+                   name="speed_limit"
+                   required>
+
+
+            <label>Lighting</label>
+
+            <select name="lighting" required>
+
+                <option value="Good">Good</option>
+
+                <option value="Poor">Poor</option>
+
+            </select>
+
+
+            <label>Weather</label>
+
+            <select name="weather" required>
+
+                <option value="Clear">Clear</option>
+
+                <option value="Rainy">Rainy</option>
+
+                <option value="Foggy">Foggy</option>
+
+            </select>
+
+
+            <label>Road Signs Present</label>
+
+            <select name="road_signs_present"
+                    required>
+
+                <option value="Yes">Yes</option>
+
+                <option value="No">No</option>
+
+            </select>
+
+
+            <label>Public Road</label>
+
+            <select name="public_road"
+                    required>
+
+                <option value="Yes">Yes</option>
+
+                <option value="No">No</option>
+
+            </select>
+
+
+            <label>Time of Day</label>
+
+            <select name="time_of_day"
+                    required>
+
+                <option value="Morning">
+                    Morning
+                </option>
+
+                <option value="Afternoon">
+                    Afternoon
+                </option>
+
+                <option value="Evening">
+                    Evening
+                </option>
+
+                <option value="Night">
+                    Night
+                </option>
+
+            </select>
+
+
+            <label>Holiday</label>
+
+            <select name="holiday"
+                    required>
+
+                <option value="Yes">Yes</option>
+
+                <option value="No">No</option>
+
+            </select>
+
+
+            <label>School Season</label>
+
+            <select name="school_season"
+                    required>
+
+                <option value="Yes">Yes</option>
+
+                <option value="No">No</option>
+
+            </select>
+
+
+            <label>Number of Reported Accidents</label>
+
+            <input type="number"
+                   name="num_reported_accidents"
+                   required>
+
+
+            <button type="submit">
+
+                Predict Risk
+
+            </button>
+
+        </form>
+
+
+        {% if prediction_text %}
+
+        <div class="result-box">
+
+            <div class="risk"
+                 style="color: {{ risk_color }};">
+
+                {{ emoji }} {{ prediction_text }}
+
+            </div>
+
+
+            <div class="score">
+
+                Risk Score:
+                {{ risk_score }} %
+
+            </div>
+
+
+            <div class="advice">
+
+                {{ advice }}
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+
+        <div class="footer">
+
+            ML Powered Road Safety Prediction System
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
