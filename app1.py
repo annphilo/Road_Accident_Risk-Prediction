@@ -94,7 +94,7 @@ def predict():
     prediction = model.predict(input_data)[0]
 
 
-    if prediction < 0.2:
+    if prediction < 0.1:
 
         risk = "Low Risk"
 
@@ -103,16 +103,6 @@ def predict():
         emoji = "✅"
 
         advice = "Road conditions appear safe."
-
-    elif prediction < 0.5:
-
-        risk = "Medium Risk"
-
-        color = "orange"
-
-        emoji = "⚠️"
-
-        advice = "Drive carefully and follow traffic rules."
 
     else:
 
@@ -125,16 +115,12 @@ def predict():
         advice = "High accident possibility. Avoid overspeeding."
 
 
-    risk_score = round(prediction * 100, 2)
-
 
     return render_template(
 
         "index1.html",
 
         prediction_text=risk,
-
-        risk_score=risk_score,
 
         risk_color=color,
 
